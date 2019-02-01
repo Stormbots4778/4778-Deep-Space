@@ -4,6 +4,8 @@ package org.usfirst.frc.team4778.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /*
 * RobotMap
@@ -11,25 +13,33 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 */
 public class RobotMap {
 	
-	// Left Front drivetrain motor controllers
+	// Left Front drivetrain motor controller
 	public static WPI_TalonSRX m_leftFront = new WPI_TalonSRX(1);
+	//public static Encoder m_encoderLeftFront = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	
-	// Left Rear drivetrain motor controllers
+	// Left Rear drivetrain motor controller
 	public static WPI_TalonSRX m_leftRear  = new WPI_TalonSRX(3);
+	//public static Encoder m_encoderLeftRear = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	
-	// Right Front drivetrain motor controllers
+	//Right Front drivetrain motor controller
 	public static WPI_TalonSRX m_rightFront = new WPI_TalonSRX(2);
+	//public static Encoder m_encoderRightFront = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 	
-	// Right Rear drivetrain motor controllers
+	
+	// Right Rear drivetrain motor controller
 	public static WPI_TalonSRX m_rightRear = new WPI_TalonSRX(0);
+	//public static Encoder m_encoderRightRear = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+	
+	// Lifter motor controllers
+	public static WPI_TalonSRX m_lifterLeft  = new WPI_TalonSRX(4); //update number
+	public static WPI_TalonSRX m_lifterRight = new WPI_TalonSRX(5); //update number
+	public static SpeedControllerGroup m_lifterMotors = new SpeedControllerGroup(m_lifterLeft, m_lifterRight);
+	
+	// Front lifter solenoid
+	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1); //update numbers
+	
+	// Rear lifter solenoid
+	public static DoubleSolenoid m_rearLiftSolenoid = new DoubleSolenoid(2,3); //update numbers
 
-	// Front solenoids
-	//public static DoubleSolenoid m_leftFrontSolenoid   = new DoubleSolenoid(0,1);
-	//public static DoubleSolenoid m_rightFrontSolenoid = new DoubleSolenoid(2,3);
-	
-	// Rear solenoids
-	//public static DoubleSolenoid m_leftRearSolenoid = new DoubleSolenoid(4,5);
-	//public static DoubleSolenoid m_rightRearSolenoid = new DoubleSolenoid(6,7);
-	
 	//public static Compressor m_compressor = new Compressor();
 }

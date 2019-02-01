@@ -19,8 +19,8 @@ public class Robot extends TimedRobot {
 	
 	// Subsystems
 	public static final Drivetrain drivetrain = new Drivetrain();
-	
 	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
+	
 	public static OI oi = new OI();
 	
 	//Command m_autonomousCommand;
