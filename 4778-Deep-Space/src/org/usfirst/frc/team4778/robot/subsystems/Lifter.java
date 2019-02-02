@@ -7,12 +7,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /*
 * Lifter.java
-* Subsystem that contains definitions for the robot lifter
+* Subsystem that contains definitions for the front and rear lifters
 */
 public class Lifter extends Subsystem {
 
-	
-	
     public void initDefaultCommand() {}
     
     public void liftFront(boolean up) {
