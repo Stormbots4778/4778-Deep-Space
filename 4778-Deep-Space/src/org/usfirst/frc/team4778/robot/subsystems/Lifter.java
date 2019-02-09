@@ -14,18 +14,18 @@ public class Lifter extends Subsystem {
     public void initDefaultCommand() {}
     
     public void liftFront(boolean up) {
-	    	if(up) {
-	    		RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
-			} else {
-				RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kForward);
-			}
+    	if(up) {
+    		RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kForward);
+		} else {
+			RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+		}
     }
     
     public void liftRear(boolean up) {
-	    	if(up) {
-				RobotMap.m_rearLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+    		if(up) {
+    			RobotMap.m_rearLiftSolenoid.set(DoubleSolenoid.Value.kForward);
 			} else {
-				RobotMap.m_rearLiftSolenoid.set(DoubleSolenoid.Value.kForward);
+				RobotMap.m_rearLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
 			}
     }
     
@@ -33,7 +33,8 @@ public class Lifter extends Subsystem {
 	    	if(backWheels) {
 	    		RobotMap.m_lifterMotors.set(speed);
 	    	} else {
-	    		RobotMap.m_frontWheels.set(speed);
+	    		RobotMap.m_leftFront.set(-speed);
+	    		RobotMap.m_rightFront.set(speed);
 	    	}
     }
     
