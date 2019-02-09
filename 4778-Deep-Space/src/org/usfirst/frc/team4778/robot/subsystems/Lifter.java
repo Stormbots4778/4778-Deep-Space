@@ -15,7 +15,7 @@ public class Lifter extends Subsystem {
     
     public void liftFront(boolean up) {
 	    	if(up) {
-				RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
+	    		RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kReverse);
 			} else {
 				RobotMap.m_frontLiftSolenoid.set(DoubleSolenoid.Value.kForward);
 			}
@@ -29,11 +29,11 @@ public class Lifter extends Subsystem {
 			}
     }
     
-    public void liftDrive(double speed, boolean forward) {
-	    	if(forward) {
+    public void liftDrive(double speed,boolean backWheels) {
+	    	if(backWheels) {
 	    		RobotMap.m_lifterMotors.set(speed);
 	    	} else {
-	    		RobotMap.m_lifterMotors.set(-speed);
+	    		RobotMap.m_frontWheels.set(speed);
 	    	}
     }
     

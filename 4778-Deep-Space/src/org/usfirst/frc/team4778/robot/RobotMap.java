@@ -3,6 +3,7 @@ package org.usfirst.frc.team4778.robot;
 // Note: WPI_TalonSRX must be used to support the updated RobotDrive
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -35,11 +36,17 @@ public class RobotMap {
 	public static WPI_TalonSRX m_lifterRight = new WPI_TalonSRX(5); //update number
 	public static SpeedControllerGroup m_lifterMotors = new SpeedControllerGroup(m_lifterLeft, m_lifterRight);
 	
+	// Front wheels motor group for ascending
+	public static SpeedControllerGroup m_frontWheels = new SpeedControllerGroup(m_leftFront, m_rightFront);
+	
 	// Front lifter solenoid
-	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1); //update numbers
+	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1);
 	
 	// Rear lifter solenoid
-	public static DoubleSolenoid m_rearLiftSolenoid = new DoubleSolenoid(2,3); //update numbers
+	public static DoubleSolenoid m_rearLiftSolenoid = new DoubleSolenoid(2,3);
+	
+	// Pusher solenoid
+	//public static DoubleSolenoid m_pusher = new DoubleSolenoid(4,5);
 
-	//public static Compressor m_compressor = new Compressor();
+	public static Compressor m_compressor = new Compressor();
 }
