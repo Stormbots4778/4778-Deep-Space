@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4778.robot;
 
-// Note: WPI_TalonSRX must be used to support the updated RobotDrive
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
