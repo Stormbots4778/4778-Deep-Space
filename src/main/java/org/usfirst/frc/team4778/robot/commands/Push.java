@@ -6,29 +6,27 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /*
 * LiftFront.java
-* Command that handles the front lifter
+* Command that controls the piston that pushes the ball into the shooter motors
 */
-public class LiftFront extends Command {
+public class Push extends Command {
 
-	private boolean up;
-	private boolean isFinished = false;
-		
-    public LiftFront(boolean up) {
-    	this.up = up;
+    public Push() {
+        requires(Robot.spheremanipulator);
     }
 
-    protected void initialize() {}
+    protected void initialize() {
+    }
 
     protected void execute() {
-    	//Robot.lifter.liftFront(up);
-    	isFinished = true;
+    	Robot.spheremanipulator.push(true);
     }
 
     protected boolean isFinished() {
-        return isFinished;
+        return false;
     }
 
     protected void end() {
+        Robot.spheremanipulator.push(false);
     }
 
     protected void interrupted() {

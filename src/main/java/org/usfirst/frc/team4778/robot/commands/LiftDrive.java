@@ -31,7 +31,7 @@ public class LiftDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.lifter.liftDrive(speed,rearWheels);
+    	//Robot.lifter.liftDrive(speed,rearWheels);
     	if (Timer.getFPGATimestamp() >= endTime) {
 			isFinished = true;
 		}
@@ -42,7 +42,7 @@ public class LiftDrive extends Command {
     }
 
     protected void end() {
-    	RobotMap.m_lifterMotors.set(0);
+    	//RobotMap.m_lifterMotors.set(0);
     }
 
     protected void interrupted() {
