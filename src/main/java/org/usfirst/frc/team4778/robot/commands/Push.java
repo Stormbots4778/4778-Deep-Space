@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Push extends Command {
 
     public Push() {
-        requires(Robot.spheremanipulator);
     }
 
     protected void initialize() {
