@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 */
 public class Shoot extends Command {
 
-	private double speed;
+    private double speed;
 	
   public Shoot(double speed) {
       requires(Robot.spheremanipulator);

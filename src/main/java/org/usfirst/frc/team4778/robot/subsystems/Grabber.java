@@ -14,13 +14,13 @@ public class Grabber extends Subsystem {
 
   public void grab(double speed,boolean grabDisk) {
     if(grabDisk) {
-	    RobotMap.m_grabberMotors.set(speed);
+	    RobotMap.m_grabberMotor.set(speed);
 	  } else {
-    	RobotMap.m_grabberMotors.set(-speed);
+    	RobotMap.m_grabberMotor.set(-speed);
 	  }
   }
 
   public void stop() {
-    RobotMap.m_grabberMotors.set(0);
+    RobotMap.m_grabberMotor.set(0);
   }
 }

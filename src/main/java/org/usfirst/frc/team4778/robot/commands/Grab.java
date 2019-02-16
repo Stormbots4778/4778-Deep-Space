@@ -15,7 +15,7 @@ public class Grab extends Command {
   private double endTime;
 
   private double speed;
-  private boolean gradDisk;
+  private boolean grabDisk;
   private boolean isFinished;
   
   public Grab(double speed,boolean grabDisk,double time) {
@@ -42,6 +42,7 @@ public class Grab extends Command {
 
   protected void end() {
     RobotMap.m_grabberMotor.set(0);
+    isFinished = false;
   }
 
   protected void interrupted() {

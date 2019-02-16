@@ -6,6 +6,7 @@ package org.usfirst.frc.team4778.robot;
 //import org.usfirst.frc.team4778.robot.commands.LiftRear;
 import org.usfirst.frc.team4778.robot.commands.Push;
 import org.usfirst.frc.team4778.robot.commands.Shoot;
+import org.usfirst.frc.team4778.robot.commands.Grab;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -45,8 +46,8 @@ public class OI {
 		pushL.whileHeld(new Push());
 		pushR.whileHeld(new Push());
 		
-		grab_disk.whenPressed(new Grab(0.1,true,0.5)); // Format is Grab(speed , grab if true release if false , time)
-		release_disk.whenPressed(new Grab(0.1,false,0.5)); // Note: the time and power will need to be found through trial and error and grab and release might be flipped
+		grab_disk.whenPressed(new Grab(0.2,true,2));
+		release_disk.whenPressed(new Grab(0.8,false,0.06));
 
 		/*
 		lift_front_up.whileActive(new LiftFront(true));
