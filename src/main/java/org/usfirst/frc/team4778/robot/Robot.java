@@ -3,6 +3,7 @@ package org.usfirst.frc.team4778.robot;
 import org.usfirst.frc.team4778.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4778.robot.subsystems.Lifter;
 import org.usfirst.frc.team4778.robot.subsystems.SphereManipulator;
+import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -25,7 +26,8 @@ public class Robot extends TimedRobot {
 	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
 	public static final Lifter lifter = new Lifter();
 	public static final SphereManipulator spheremanipulator = new SphereManipulator();
-	
+	public static final Grabber grabber = new Grabber();
+
 	public static OI oi = new OI();
 	
 	//Command m_autonomousCommand;

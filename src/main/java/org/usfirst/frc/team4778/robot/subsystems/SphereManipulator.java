@@ -11,21 +11,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 */
 public class SphereManipulator extends Subsystem {
 
-    public void initDefaultCommand() {}
+  public void initDefaultCommand() {}
 
-    public void shoot(double speed) {
-    		RobotMap.m_shooterMotors.set(speed);
+  public void shoot(double speed) {
+      RobotMap.m_shooterMotors.set(speed);
+  }
+  
+  public void push(boolean out) {
+    if(out) {
+      RobotMap.m_pusherSolenoid.set(DoubleSolenoid.Value.kForward);
+    } else {
+      RobotMap.m_pusherSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
-    
-    public void push(boolean out) {
-    	if(out) {
-    			RobotMap.m_pusherSolenoid.set(DoubleSolenoid.Value.kForward);
-    	} else {
-    			RobotMap.m_pusherSolenoid.set(DoubleSolenoid.Value.kReverse);
-    	}
-    }
+  }
 
-    public void stop() {
-    	  RobotMap.m_shooterMotors.set(0);
+  public void stop() {
+    RobotMap.m_shooterMotors.set(0);
   }
 }

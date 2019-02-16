@@ -40,6 +40,8 @@ public class Lifter extends Subsystem {
 		*/
     public void stop() {
     		//RobotMap.m_lifterMotors.set(0);
+				//RobotMap.m_leftFront.set(0);
+				//RobotMap.m_rightFront.set(0);
     }
 }
 

@@ -26,6 +26,9 @@ public class OI {
 	public static Button pushL = new JoystickButton(joystickLeft, 1);
 	public static Button pushR = new JoystickButton(joystickRight, 1);
 
+	public static Button grab_disk = new JoystickButton(joystickLeft, 2);
+	public static Button release_disk = new JoystickButton(joystickRight,2); 
+
 	/*
 	public static Button lift_front_up = new JoystickButton(joystickRight, 6); //comment out when not testing
 	public static Button lift_rear_up = new JoystickButton(joystickLeft, 11); //comment out when not testing
@@ -42,6 +45,9 @@ public class OI {
 		pushL.whileHeld(new Push());
 		pushR.whileHeld(new Push());
 		
+		grab_disk.whenPressed(new Grab(0.1,true,0.5)); // Format is Grab(speed , grab if true release if false , time)
+		release_disk.whenPressed(new Grab(0.1,false,0.5)); // Note: the time and power will need to be found through trial and error and grab and release might be flipped
+
 		/*
 		lift_front_up.whileActive(new LiftFront(true));
 		lift_rear_up.whileActive(new LiftRear(true));

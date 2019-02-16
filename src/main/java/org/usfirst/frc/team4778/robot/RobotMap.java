@@ -38,6 +38,10 @@ public class RobotMap {
 	public static WPI_TalonSRX m_shooterLeft = new WPI_TalonSRX(6);
 	public static WPI_TalonSRX m_shooterRight = new WPI_TalonSRX(7);
 	public static SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(m_shooterLeft, m_shooterRight);
+	
+	// Grabber motor controllers
+	public static WPI_TalonSRX m_grabberMotor = new WPI_TalonSRX(8);
+	
 	/*
 	// Front lifter solenoid
 	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1);
