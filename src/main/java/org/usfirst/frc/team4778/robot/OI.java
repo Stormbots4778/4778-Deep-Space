@@ -21,8 +21,8 @@ public class OI {
 	public static Joystick joystickLeft = new Joystick(0);
 	public static Joystick joystickRight = new Joystick(1);
 
-	public static Button shootL = new JoystickButton(joystickLeft, 3);
-	public static Button shootR = new JoystickButton(joystickRight, 3);
+	public static Button shoot = new JoystickButton(joystickLeft, 3);
+	public static Button intake = new JoystickButton(joystickRight, 3);
 
 	public static Button pushL = new JoystickButton(joystickLeft, 1);
 	public static Button pushR = new JoystickButton(joystickRight, 1);
@@ -40,8 +40,8 @@ public class OI {
 	*/
 
 	public OI() {
-		shootL.toggleWhenPressed(new Shoot(0.25));
-		shootR.toggleWhenPressed(new Shoot(0.45));
+		intake.whileHeld(new Shoot(-0.1));
+		shoot.toggleWhenPressed(new Shoot(0.35));
 
 		pushL.whileHeld(new Push());
 		pushR.whileHeld(new Push());

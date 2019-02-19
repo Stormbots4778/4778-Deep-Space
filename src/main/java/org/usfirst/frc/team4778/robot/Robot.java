@@ -33,18 +33,20 @@ public class Robot extends TimedRobot {
 	//Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
-	
 	@Override
 	public void robotInit() {
-		
+		CameraServer.getInstance().addAxisCamera("10.47.78.2");
+		CameraServer.getInstance().startAutomaticCapture();
+		initSmartDashboard();
+		updateSmartDashboard();
 		// Auto Chooser
 		//SmartDashboard.putData("Auto mode", m_chooser);
-		
-		// Initialize the camera server
-		//CameraServer.getInstance().startAutomaticCapture();
-		
 	}
 
+	public void initSmartDashboard() {
+	}
+	public void updateSmartDashboard(){
+	}
 	@Override
 	public void disabledInit() {}
 
@@ -65,7 +67,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousPeriodic() {
+		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
+		updateSmartDashboard();
 	}
 
 	@Override
@@ -77,7 +81,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
+		updateSmartDashboard();
 	}
 	
 	@Override

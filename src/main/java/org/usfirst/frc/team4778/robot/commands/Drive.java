@@ -20,7 +20,7 @@ public class Drive extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.m_drive.driveCartesian(-OI.joystickLeft.getX()/2, OI.joystickLeft.getY()/2,-OI.joystickRight.getX()/2);
+		Robot.m_drive.driveCartesian(-OI.joystickLeft.getX(), OI.joystickLeft.getY()/2,-OI.joystickRight.getX()/2);
 	}
 
 	@Override
