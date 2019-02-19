@@ -25,6 +25,7 @@ public class Grab extends Command {
   }
 
   protected void initialize() {
+    isFinished = false;
     endTime = Timer.getFPGATimestamp() + time;
   }
 
