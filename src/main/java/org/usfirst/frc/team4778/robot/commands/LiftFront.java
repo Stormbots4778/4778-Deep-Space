@@ -20,7 +20,7 @@ public class LiftFront extends Command {
     protected void initialize() {}
 
     protected void execute() {
-    	//Robot.lifter.liftFront(up);
+    	Robot.lifter.liftFront(up);
     	isFinished = true;
     }
 

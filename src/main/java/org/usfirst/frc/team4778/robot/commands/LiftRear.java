@@ -20,7 +20,7 @@ public class LiftRear extends Command {
     protected void initialize() {}
 
     protected void execute() {
-    	//Robot.lifter.liftRear(up);
+    	Robot.lifter.liftRear(up);
     	isFinished = true;
     }
 

@@ -45,8 +45,10 @@ public class Robot extends TimedRobot {
 
 	public void initSmartDashboard() {
 	}
-	public void updateSmartDashboard(){
+
+	public void updateSmartDashboard() {
 	}
+
 	@Override
 	public void disabledInit() {}
 

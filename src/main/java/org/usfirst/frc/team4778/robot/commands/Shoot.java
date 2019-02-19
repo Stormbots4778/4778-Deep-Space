@@ -12,26 +12,26 @@ public class Shoot extends Command {
 
     private double speed;
 	
-  public Shoot(double speed) {
-      requires(Robot.spheremanipulator);
-      this.speed = speed;
-  }
+    public Shoot(double speed) {
+        requires(Robot.spheremanipulator);
+        this.speed = speed;
+    }
 
-  protected void initialize() {}
+    protected void initialize() {}
 
-  protected void execute() {
-    	Robot.spheremanipulator.shoot(speed);
-  }
+    protected void execute() {
+        Robot.spheremanipulator.shoot(speed);
+    }
 
-  protected boolean isFinished() {
-      return false;
-  }
+    protected boolean isFinished() {
+        return false;
+    }
 
-  protected void end() {
-  		Robot.spheremanipulator.stop();
-  }
+    protected void end() {
+  	    Robot.spheremanipulator.stop();
+    }
 
     protected void interrupted() {
-    		end();
+        end();
     }
 }

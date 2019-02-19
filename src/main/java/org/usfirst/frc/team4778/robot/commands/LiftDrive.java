@@ -14,16 +14,15 @@ public class LiftDrive extends Command {
 	
 	private double time;
 	private double endTime;
-	
+	private boolean isFinished = false;
+
 	private double speed;
 	private boolean rearWheels;
-	private boolean isFinished;
-		
+	
     public LiftDrive(double speed,boolean rearWheels,double time) {
     	this.rearWheels = rearWheels;
     	this.speed = speed;
     	this.time = time;
-    	isFinished = false;
     }
 
     protected void initialize() {
@@ -31,10 +30,10 @@ public class LiftDrive extends Command {
     }
 
     protected void execute() {
-    	//Robot.lifter.liftDrive(speed,rearWheels);
     	if (Timer.getFPGATimestamp() >= endTime) {
 			isFinished = true;
 		}
+		Robot.lifter.liftDrive(speed,rearWheels);
     }
 
     protected boolean isFinished() {
@@ -42,7 +41,7 @@ public class LiftDrive extends Command {
     }
 
     protected void end() {
-    	//RobotMap.m_lifterMotors.set(0);
+    	RobotMap.m_lifterMotors.set(0);
     }
 
     protected void interrupted() {

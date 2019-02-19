@@ -10,11 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 */
 public class Push extends Command {
 
-    public Push() {
-    }
+    public Push() {}
 
-    protected void initialize() {
-    }
+    protected void initialize() {}
 
     protected void execute() {
     	Robot.spheremanipulator.push(true);

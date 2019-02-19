@@ -13,16 +13,15 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Grab extends Command {
   private double time;
   private double endTime;
+  private boolean isFinished = false;
 
   private double speed;
   private boolean grabDisk;
-  private boolean isFinished;
   
   public Grab(double speed,boolean grabDisk,double time) {
     this.speed = speed;
     this.grabDisk = grabDisk;
     this.time = time;
-    isFinished = false;
   }
 
   protected void initialize() {
@@ -30,10 +29,10 @@ public class Grab extends Command {
   }
 
   protected void execute() {
-    Robot.grabber.grab(speed,grabDisk);
     if (Timer.getFPGATimestamp() >= endTime) {
       isFinished = true;
     }
+    Robot.grabber.grab(speed,grabDisk);
   }
 
   protected boolean isFinished() {
@@ -42,7 +41,6 @@ public class Grab extends Command {
 
   protected void end() {
     RobotMap.m_grabberMotor.set(0);
-    isFinished = false;
   }
 
   protected void interrupted() {

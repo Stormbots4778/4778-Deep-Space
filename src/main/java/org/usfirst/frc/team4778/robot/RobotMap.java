@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
+//import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /*
@@ -28,12 +28,12 @@ public class RobotMap {
 	// Right Rear drivetrain motor controller
 	public static WPI_TalonSRX m_rightRear = new WPI_TalonSRX(0);
 	//public static Encoder m_encoderRightRear = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
-	/*
+	
 	// Lifter motor controllers
 	public static WPI_TalonSRX m_lifterLeft = new WPI_TalonSRX(4);
 	public static WPI_TalonSRX m_lifterRight = new WPI_TalonSRX(5);
 	public static SpeedControllerGroup m_lifterMotors = new SpeedControllerGroup(m_lifterLeft, m_lifterRight);
-	*/
+
 	// Shooter motor controllers
 	public static WPI_TalonSRX m_shooterLeft = new WPI_TalonSRX(6);
 	public static WPI_TalonSRX m_shooterRight = new WPI_TalonSRX(7);
@@ -42,13 +42,13 @@ public class RobotMap {
 	// Grabber motor controllers
 	public static WPI_TalonSRX m_grabberMotor = new WPI_TalonSRX(8);
 	
-	/*
+	
 	// Front lifter solenoid
 	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1);
 	
 	// Rear lifter solenoid
 	public static DoubleSolenoid m_rearLiftSolenoid = new DoubleSolenoid(2,3);
-	*/
+	
 	// Pusher solenoid
 	public static DoubleSolenoid m_pusherSolenoid = new DoubleSolenoid(4,5);
 
