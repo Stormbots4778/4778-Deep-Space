@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Descend extends CommandGroup {
 
     public Descend() {
-    	addSequential(new LiftFront(false));
-		addParallel(new LiftRear(false));
+		addSequential(new LiftRear(false));
+		addSequential(new AutoTimer(0.4));
+		addSequential(new LiftFront(false));
 	}
 }

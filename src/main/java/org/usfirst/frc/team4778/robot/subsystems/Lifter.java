@@ -30,18 +30,21 @@ public class Lifter extends Subsystem {
     }
     
     public void liftDrive(double speed,boolean backWheels) {
-	    if(backWheels) {
-	    	RobotMap.m_lifterMotors.set(speed);
-	    } else {
-	    	RobotMap.m_leftFront.set(-speed);
-	    	RobotMap.m_rightFront.set(speed);
-	    }
-    }
+			if(backWheels) {
+				RobotMap.m_lifterMotors.set(speed);
+			} else {
+				RobotMap.m_leftFront.set(-speed);
+				RobotMap.m_rightFront.set(speed);
+			}
+				//RobotMap.m_lifterMotors.set(speed);
+				//RobotMap.m_leftFront.set(-speed);
+				//RobotMap.m_rightFront.set(speed);
+		}
 		
     public void stop() {
     	RobotMap.m_lifterMotors.set(0);
-		RobotMap.m_leftFront.set(0);
-		RobotMap.m_rightFront.set(0);
+			RobotMap.m_leftFront.set(0);
+			RobotMap.m_rightFront.set(0);
     }
 }
 

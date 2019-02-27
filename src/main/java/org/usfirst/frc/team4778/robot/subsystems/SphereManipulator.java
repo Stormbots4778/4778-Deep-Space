@@ -3,6 +3,7 @@ package org.usfirst.frc.team4778.robot.subsystems;
 import org.usfirst.frc.team4778.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /*
@@ -14,7 +15,8 @@ public class SphereManipulator extends Subsystem {
   public void initDefaultCommand() {}
 
   public void shoot(double speed) {
-      RobotMap.m_shooterMotors.set(speed);
+    RobotMap.m_shooterMotors.set(speed);
+    RobotMap.leds.set(DoubleSolenoid.Value.kForward);
   }
   
   public void push(boolean out) {

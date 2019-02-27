@@ -26,6 +26,7 @@ public class LiftDrive extends Command {
     }
 
     protected void initialize() {
+		isFinished = false;
     	endTime = Timer.getFPGATimestamp() + time;
     }
 

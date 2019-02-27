@@ -3,13 +3,15 @@ package org.usfirst.frc.team4778.robot;
 import org.usfirst.frc.team4778.robot.commands.Ascend;
 import org.usfirst.frc.team4778.robot.commands.Descend;
 import org.usfirst.frc.team4778.robot.commands.Grab;
+import org.usfirst.frc.team4778.robot.commands.LiftDrive;
 import org.usfirst.frc.team4778.robot.commands.LiftFront;
 import org.usfirst.frc.team4778.robot.commands.LiftRear;
 import org.usfirst.frc.team4778.robot.commands.Push;
 import org.usfirst.frc.team4778.robot.commands.Shoot;
+import org.usfirst.frc.team4778.robot.commands.TimedGrab;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /*
@@ -37,6 +39,9 @@ public class OI {
 	public static Button descend = new JoystickButton(joystickLeft,8);
 	public static Button ascend = new JoystickButton(joystickLeft,9);
 
+	public static Button lift_drive_forward = new JoystickButton(joystickLeft, 6);
+	public static Button lift_drive_backward = new JoystickButton(joystickLeft, 7);
+
 	public OI() {
 		intake.toggleWhenPressed(new Shoot(-0.1));
 		shoot.toggleWhenPressed(new Shoot(0.35));
@@ -44,8 +49,8 @@ public class OI {
 		pushL.whileHeld(new Push());
 		pushR.whileHeld(new Push());
 		
-		grab_disk.whenPressed(new Grab(0.2,true,2));
-		release_disk.whenPressed(new Grab(0.8,false,0.06));
+		grab_disk.whileHeld(new Grab(0.2,true));
+		release_disk.whenPressed(new TimedGrab(0.8,false,0.06));
 
 		lift_front_up.whileActive(new LiftFront(true));
 		lift_rear_up.whileActive(new LiftRear(true));
@@ -53,5 +58,7 @@ public class OI {
 		lift_rear_down.whileActive(new LiftRear(false));
 		ascend.whenPressed(new Ascend());
 		descend.whenPressed(new Descend());
+		lift_drive_forward.whenPressed(new LiftDrive(0.7, true, 1));
+		lift_drive_backward.whenPressed(new LiftDrive(-0.7, true, 1));
 	}
 }

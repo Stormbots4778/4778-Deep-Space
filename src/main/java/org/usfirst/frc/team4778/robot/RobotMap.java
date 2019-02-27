@@ -42,7 +42,6 @@ public class RobotMap {
 	// Grabber motor controllers
 	public static WPI_TalonSRX m_grabberMotor = new WPI_TalonSRX(8);
 	
-	
 	// Front lifter solenoid
 	public static DoubleSolenoid m_frontLiftSolenoid = new DoubleSolenoid(0,1);
 	
@@ -51,6 +50,9 @@ public class RobotMap {
 	
 	// Pusher solenoid
 	public static DoubleSolenoid m_pusherSolenoid = new DoubleSolenoid(4,5);
+
+	//leds 6=red 7=blue
+	public static DoubleSolenoid leds = new DoubleSolenoid(6,7);
 
 	public static Compressor m_compressor = new Compressor();
 }
