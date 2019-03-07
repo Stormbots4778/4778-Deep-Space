@@ -58,7 +58,7 @@ public class OI {
 		lift_rear_down.whileActive(new LiftRear(false));
 		ascend.whenPressed(new Ascend());
 		descend.whenPressed(new Descend());
-		lift_drive_forward.whenPressed(new LiftDrive(0.7, true, 1));
-		lift_drive_backward.whenPressed(new LiftDrive(-0.7, true, 1));
+		lift_drive_forward.whenPressed(new LiftDrive(0.5, true, 1));
+		lift_drive_backward.whenPressed(new LiftDrive(-0.5, true, 1));
 	}
 }

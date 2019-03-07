@@ -10,23 +10,22 @@ public class Ascend extends CommandGroup {
 
 	public Ascend() {
 		addSequential(new LiftRear(true));
-		addSequential(new AutoTimer(0.4));
-		addSequential(new LiftFront(true)); //Extend front and rear lifters
-		/*
-		addSequential(new AutoTimer(3));
+		addParallel(new LiftFront(true)); //Extend front and rear lifters
 		
-		addSequential(new LiftDrive(0.3,true,0.5)); //Position front of robot on upper level
+		addSequential(new AutoTimer(4));
+		
+		addSequential(new LiftDrive(0.4,true,1)); //Position front of robot on upper level
 		
 		addSequential(new LiftFront(false)); //Retract front lifter
-		addSequential(new AutoTimer(3));
+		addSequential(new AutoTimer(4));
 		
-		addSequential(new LiftDrive(0.3,true,0.5)); //Drive forward further onto upper level
-		addParallel(new LiftDrive(0.3,false,0.5));
+		addSequential(new LiftDrive(0.4,true,1)); //Drive forward further onto upper level
+		addParallel(new LiftDrive(0.4,false,1));
 		
 		addSequential(new LiftRear(false)); //Retract rear lifter
-		addSequential(new AutoTimer(3));
+		addSequential(new AutoTimer(4));
 		
-		addSequential(new LiftDrive(0.3,false,0.5)); //Drive all the way onto upper level
-		*/
+		addSequential(new LiftDrive(0.4,false,1)); //Drive all the way onto upper level
+
 	}
 }

@@ -1,19 +1,20 @@
 package org.usfirst.frc.team4778.robot;
 
+import org.usfirst.frc.team4778.robot.commands.AutoCrossLine;
+import org.usfirst.frc.team4778.robot.commands.AutoDisk;
+import org.usfirst.frc.team4778.robot.commands.AutoSphere;
 import org.usfirst.frc.team4778.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 import org.usfirst.frc.team4778.robot.subsystems.Lifter;
 import org.usfirst.frc.team4778.robot.subsystems.SphereManipulator;
-import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 /*
 * Robot.java
@@ -23,13 +24,15 @@ public class Robot extends TimedRobot {
 	
 	// Subsystems
 	public static final Drivetrain drivetrain = new Drivetrain();
-	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
-	public static final Lifter lifter = new Lifter();
-	public static final SphereManipulator spheremanipulator = new SphereManipulator();
 	public static final Grabber grabber = new Grabber();
+	public static final Lifter lifter = new Lifter();
+	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
+	public static final SphereManipulator spheremanipulator = new SphereManipulator();
 
 	public static OI oi = new OI();
 	
+	public static final int PULSES_PER_REVOLUTION = 256; //PPR
+
 	//Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
