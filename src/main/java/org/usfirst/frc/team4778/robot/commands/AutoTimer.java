@@ -16,28 +16,29 @@ public class AutoTimer extends Command {
 	private boolean isFinished;
 	
     public AutoTimer(double time) {
-    		this.time = time;
-    		isFinished = false;
+    	this.time = time;
+    	isFinished = false;
     }
 
     protected void initialize() {
-    		endTime = Timer.getFPGATimestamp() + time;
+    	endTime = Timer.getFPGATimestamp() + time;
     }
 
     protected void execute() {
-		if (Timer.getFPGATimestamp() >= endTime) {
-			isFinished = true;
-		}	
+		  if (Timer.getFPGATimestamp() >= endTime) {
+		  	isFinished = true;
+		  }	
     }
 
     protected boolean isFinished() {
-        return isFinished;
+      return isFinished;
     }
 
     protected void end() {
+      isFinished = false;
     }
 
     protected void interrupted() {
-    		end();
+    	end();
     }
 }

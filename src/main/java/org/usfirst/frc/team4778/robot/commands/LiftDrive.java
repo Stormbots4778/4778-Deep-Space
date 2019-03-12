@@ -26,23 +26,23 @@ public class LiftDrive extends Command {
     }
 
     protected void initialize() {
-		isFinished = false;
     	endTime = Timer.getFPGATimestamp() + time;
     }
 
     protected void execute() {
     	if (Timer.getFPGATimestamp() >= endTime) {
-			isFinished = true;
-		}
-		Robot.lifter.liftDrive(speed,rearWheels);
+				isFinished = true;
+			}
+			Robot.lifter.liftDrive(speed,rearWheels);
     }
 
     protected boolean isFinished() {
-        return isFinished;
+      return isFinished;
     }
 
     protected void end() {
-    	RobotMap.m_lifterMotors.set(0);
+			RobotMap.m_lifterMotors.set(0);
+			isFinished = false;
     }
 
     protected void interrupted() {
