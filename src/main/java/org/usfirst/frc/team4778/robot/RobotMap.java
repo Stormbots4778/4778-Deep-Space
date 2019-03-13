@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-//import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 /*
@@ -15,19 +15,19 @@ public class RobotMap {
 	
 	// Left Front drivetrain motor controller
 	public static WPI_TalonSRX m_leftFront = new WPI_TalonSRX(1);
-	//public static Encoder m_encoderLeftFront = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	public static Encoder m_encoderLeftFront = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 	
 	// Left Rear drivetrain motor controller
 	public static WPI_TalonSRX m_leftRear = new WPI_TalonSRX(3);
-	//public static Encoder m_encoderLeftRear = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+	public static Encoder m_encoderLeftRear = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	
 	//Right Front drivetrain motor controller
 	public static WPI_TalonSRX m_rightFront = new WPI_TalonSRX(2);
-	//public static Encoder m_encoderRightFront = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
+	public static Encoder m_encoderRightFront = new Encoder(7, 6, false, Encoder.EncodingType.k4X);
 	
 	// Right Rear drivetrain motor controller
 	public static WPI_TalonSRX m_rightRear = new WPI_TalonSRX(0);
-	//public static Encoder m_encoderRightRear = new Encoder(6, 7, false, Encoder.EncodingType.k4X);
+	public static Encoder m_encoderRightRear = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	
 	// Lifter motor controllers
 	public static WPI_TalonSRX m_lifterLeft = new WPI_TalonSRX(4);
@@ -51,8 +51,9 @@ public class RobotMap {
 	// Pusher solenoid
 	public static DoubleSolenoid m_pusherSolenoid = new DoubleSolenoid(4,5);
 
-	//leds 6=red 7=blue
-	public static DoubleSolenoid leds = new DoubleSolenoid(6,7);
+	// LED strip solenoid
+	public static DoubleSolenoid leds = new DoubleSolenoid(6,7); //6 Red 7 Blue
 
+	// Compressor
 	public static Compressor m_compressor = new Compressor();
 }

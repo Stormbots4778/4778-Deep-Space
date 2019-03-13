@@ -32,24 +32,23 @@ public class Robot extends TimedRobot {
 	public static OI oi = new OI();
 	
 	public static final int PULSES_PER_REVOLUTION = 256; //PPR
+	public static final int WHEEL_DIAMETER = 6; //inches
 
 	//Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
 	@Override
 	public void robotInit() {
+		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
+		RobotMap.m_encoderLeftRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
+		RobotMap.m_encoderRightFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
+		RobotMap.m_encoderRightRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
+
 		CameraServer.getInstance().addAxisCamera("10.47.78.2");
 		CameraServer.getInstance().startAutomaticCapture();
-		initSmartDashboard();
-		updateSmartDashboard();
+
 		// Auto Chooser
 		//SmartDashboard.putData("Auto mode", m_chooser);
-	}
-
-	public void initSmartDashboard() {
-	}
-
-	public void updateSmartDashboard() {
 	}
 
 	@Override
@@ -74,11 +73,20 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
-		updateSmartDashboard();
+
+		SmartDashboard.putNumber("Front Left Encoder", RobotMap.m_encoderLeftFront.getDistance());
+		SmartDashboard.putNumber("Back Left Encoder", RobotMap.m_encoderLeftRear.getDistance());
+		SmartDashboard.putNumber("Front Right Encoder", RobotMap.m_encoderRightFront.getDistance());
+		SmartDashboard.putNumber("Back Right Encoder", RobotMap.m_encoderRightRear.getDistance());
 	}
 
 	@Override
-	public void teleopInit() {			
+	public void teleopInit() {	
+		RobotMap.m_encoderLeftFront.reset();
+		RobotMap.m_encoderLeftRear.reset();
+		RobotMap.m_encoderRightFront.reset();
+		RobotMap.m_encoderRightRear.reset();
+
 //		if (m_autonomousCommand != null) {
 //			m_autonomousCommand.cancel();
 //		}
@@ -88,7 +96,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
-		updateSmartDashboard();
+
+		SmartDashboard.putNumber("Front Left Encoder", RobotMap.m_encoderLeftFront.getDistance());
+		SmartDashboard.putNumber("Back Left Encoder", RobotMap.m_encoderLeftRear.getDistance());
+		SmartDashboard.putNumber("Front Right Encoder", RobotMap.m_encoderRightFront.getDistance());
+		SmartDashboard.putNumber("Back Right Encoder", RobotMap.m_encoderRightRear.getDistance());
 	}
 	
 	@Override

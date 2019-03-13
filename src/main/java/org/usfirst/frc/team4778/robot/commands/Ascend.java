@@ -10,7 +10,7 @@ public class Ascend extends CommandGroup {
 
 	public Ascend() {
 		addSequential(new LiftFront(true));
-		addSequential(new AutoTimer(0.4)); //Delay between lifting front and rear
+		addSequential(new AutoTimer(0.35)); //Delay between lifting front and rear
 		addSequential(new LiftRear(true)); //Extend front and rear lifters
 		
 		addSequential(new AutoTimer(2));

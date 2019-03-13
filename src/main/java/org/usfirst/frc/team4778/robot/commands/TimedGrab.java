@@ -25,7 +25,6 @@ public class TimedGrab extends Command {
   }
 
   protected void initialize() {
-    isFinished = false;
     endTime = Timer.getFPGATimestamp() + time;
   }
 
@@ -42,6 +41,7 @@ public class TimedGrab extends Command {
 
   protected void end() {
     RobotMap.m_grabberMotor.set(0);
+    isFinished = false;
   }
 
   protected void interrupted() {
