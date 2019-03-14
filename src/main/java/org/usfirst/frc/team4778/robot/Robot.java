@@ -33,6 +33,16 @@ public class Robot extends TimedRobot {
 	
 	public static final int PULSES_PER_REVOLUTION = 256; //PPR
 	public static final int WHEEL_DIAMETER = 6; //inches
+	public static final double DISTANCE_BETWEEN_WHEELS = 21.9; //inches
+	
+	//Cleanup this mess
+	public static double LF; 
+	public static double LR;
+	public static double RF;
+	public static double RR;
+	public static double x;
+	public static double y;
+	public static double angle;
 
 	//Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -73,11 +83,6 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
-
-		SmartDashboard.putNumber("Front Left Encoder", RobotMap.m_encoderLeftFront.getDistance());
-		SmartDashboard.putNumber("Back Left Encoder", RobotMap.m_encoderLeftRear.getDistance());
-		SmartDashboard.putNumber("Front Right Encoder", RobotMap.m_encoderRightFront.getDistance());
-		SmartDashboard.putNumber("Back Right Encoder", RobotMap.m_encoderRightRear.getDistance());
 	}
 
 	@Override
@@ -97,10 +102,22 @@ public class Robot extends TimedRobot {
 		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 
-		SmartDashboard.putNumber("Front Left Encoder", RobotMap.m_encoderLeftFront.getDistance());
-		SmartDashboard.putNumber("Back Left Encoder", RobotMap.m_encoderLeftRear.getDistance());
-		SmartDashboard.putNumber("Front Right Encoder", RobotMap.m_encoderRightFront.getDistance());
-		SmartDashboard.putNumber("Back Right Encoder", RobotMap.m_encoderRightRear.getDistance());
+		//Create separate command
+		LF = RobotMap.m_encoderLeftFront.getDistance();
+		LR = RobotMap.m_encoderLeftRear.getDistance();
+		RF = RobotMap.m_encoderRightFront.getDistance();
+		RR = RobotMap.m_encoderRightRear.getDistance();
+		x = ((LF + RF) - (LR + RR)) / 4;
+		y = ((LF + LR) - (RF + RR)) / 4;
+		angle = ((((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS)) * (180 / Math.PI)) % 360;
+
+		SmartDashboard.putNumber("Front Left Encoder", LF);
+		SmartDashboard.putNumber("Back Left Encoder", LR);
+		SmartDashboard.putNumber("Front Right Encoder", RF);
+		SmartDashboard.putNumber("Back Right Encoder", RR);
+		SmartDashboard.putNumber("x", x);
+		SmartDashboard.putNumber("y", y);
+		SmartDashboard.putNumber("angle", angle);
 	}
 	
 	@Override
