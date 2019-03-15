@@ -35,30 +35,35 @@ public class Robot extends TimedRobot {
 	public static final int WHEEL_DIAMETER = 6; //inches
 	public static final double DISTANCE_BETWEEN_WHEELS = 21.9; //inches
 	
+	Command m_autonomousCommand;
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	
 	//Cleanup this mess
 	public static double LF; 
 	public static double LR;
 	public static double RF;
 	public static double RR;
-	public static double x;
-	public static double y;
-	public static double angle;
-
-	//Command m_autonomousCommand;
-	//SendableChooser<Command> m_chooser = new SendableChooser<>();
+	public static double x = 0;
+	public static double y = 0;
+	public static double angle = 0;
 	
 	@Override
 	public void robotInit() {
+		// Auto Chooser
+		m_chooser.setDefaultOption("Cross Line", new AutoCrossLine());
+		m_chooser.addOption("Disk", new AutoDisk());
+		m_chooser.addOption("Sphere", new AutoSphere());
+		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		// Initialize Camera Server
+		//CameraServer.getInstance().addAxisCamera("10.47.78.2");
+		CameraServer.getInstance().startAutomaticCapture();
+
+		// Configure encoder pulse values
 		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
 		RobotMap.m_encoderLeftRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
 		RobotMap.m_encoderRightFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
 		RobotMap.m_encoderRightRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
-
-		CameraServer.getInstance().addAxisCamera("10.47.78.2");
-		CameraServer.getInstance().startAutomaticCapture();
-
-		// Auto Chooser
-		//SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
 	@Override
@@ -72,16 +77,16 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 						
-//		m_autonomousCommand = m_chooser.getSelected();
-//				
-//		if (m_autonomousCommand != null) {
-//			m_autonomousCommand.start();
-//		}
+		m_autonomousCommand = m_chooser.getSelected();
+				
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.start();
+		}
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		CameraServer.getInstance().getVideo();
+		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 	}
 
@@ -92,32 +97,34 @@ public class Robot extends TimedRobot {
 		RobotMap.m_encoderRightFront.reset();
 		RobotMap.m_encoderRightRear.reset();
 
-//		if (m_autonomousCommand != null) {
-//			m_autonomousCommand.cancel();
-//		}
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.cancel();
+		}
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		CameraServer.getInstance().getVideo();
+		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
+
+		
 
 		//Create separate command
 		LF = RobotMap.m_encoderLeftFront.getDistance();
 		LR = RobotMap.m_encoderLeftRear.getDistance();
 		RF = RobotMap.m_encoderRightFront.getDistance();
 		RR = RobotMap.m_encoderRightRear.getDistance();
-		x = ((LF + RF) - (LR + RR)) / 4;
-		y = ((LF + LR) - (RF + RR)) / 4;
-		angle = ((((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS)) * (180 / Math.PI)) % 360;
+		angle = ((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS);
+		x = (((LF + RF) - (LR + RR)) / 4) * Math.sin(angle);
+		y = (((LF + LR) - (RF + RR)) / 4) * Math.cos(angle);
 
 		SmartDashboard.putNumber("Front Left Encoder", LF);
 		SmartDashboard.putNumber("Back Left Encoder", LR);
 		SmartDashboard.putNumber("Front Right Encoder", RF);
 		SmartDashboard.putNumber("Back Right Encoder", RR);
+		SmartDashboard.putNumber("angle", Math.toDegrees(angle) % 360);
 		SmartDashboard.putNumber("x", x);
 		SmartDashboard.putNumber("y", y);
-		SmartDashboard.putNumber("angle", angle);
 	}
 	
 	@Override

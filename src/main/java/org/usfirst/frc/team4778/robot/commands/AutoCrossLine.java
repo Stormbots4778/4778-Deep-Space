@@ -9,6 +9,6 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoCrossLine extends CommandGroup {
   
   public AutoCrossLine() {
-    addSequential(new Descend());
+    //addSequential(new Descend());
   }
 }

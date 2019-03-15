@@ -15,7 +15,11 @@ public class SphereManipulator extends Subsystem {
 
   public void shoot(double speed) {
     RobotMap.m_shooterMotors.set(speed);
-    RobotMap.leds.set(DoubleSolenoid.Value.kForward);
+    // if(Math.abs(speed) == speed) {
+    //   RobotMap.leds.set(DoubleSolenoid.Value.kForward);
+    // } else {
+    //   RobotMap.leds.set(DoubleSolenoid.Value.kReverse);
+    // }
   }
   
   public void push(boolean out) {
