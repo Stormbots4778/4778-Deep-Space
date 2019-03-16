@@ -6,8 +6,6 @@ import org.usfirst.frc.team4778.robot.pid.PIDController;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /*
  * AutoEncoderDrive.java
@@ -21,9 +19,11 @@ public class AutoEncoderDrive extends Command {
 	private double time;
 	private double endTime;
 	
-	private PIDController masterPID
-  private PIDController slavePID
-	
+	private PIDController masterPIDrightFront;
+	private PIDController slavePIDrightRear;
+	private PIDController slavePIDleftFront;
+	private PIDController slavePIDleftRear;
+
 	private boolean isFinished;
   
 	public AutoEncoderDrive(double speed, double distance, double time) {
@@ -41,38 +41,39 @@ public class AutoEncoderDrive extends Command {
 		endTime = 0;
 		isFinished = false;
 	
-		masterPIDleft = new PIDController(0.25, 0, 0, distance);
-		masterPIDleft.setTolerence(3);
-		masterPIDleft.setOutputLimits(-speed, speed);
+		masterPIDrightFront = new PIDController(0.5, 0, 0, distance);
+		masterPIDrightFront.setTolerence(3);
+		masterPIDrightFront.setOutputLimits(-speed, speed);
 
-		slavePIDright = new PIDController(0.75, 0, 0, 0);
-		slavePIDright.setTolerence(1);
-		slavePIDright.setOutputLimits(-0.6, 0.6);
+		slavePIDrightRear = new PIDController(0.1, 0, 0, 0);
+		slavePIDrightRear.setTolerence(1);
+		slavePIDrightRear.setOutputLimits(-0.3, 0.3);
 
-		masterPIDright = new PIDController(0.25, 0, 0, distance);
-		masterPIDright.setTolerence(3);
-		masterPIDright.setOutputLimits(-speed, speed);
+		slavePIDleftFront = new PIDController(0.5, 0, 0, 0);
+		slavePIDleftFront.setTolerence(3);
+		slavePIDleftFront.setOutputLimits(-0.35, 0.35);
 
-		slavePIDleft = new PIDController(0.75, 0, 0, 0);
-		slavePIDleft.setTolerence(1);
-		slavePIDleft.setOutputLimits(-0.6, 0.6);
+		slavePIDleftRear = new PIDController(0.1, 0, 0, 0);
+		slavePIDleftRear.setTolerence(1);
+		slavePIDleftRear.setOutputLimits(-0.3, 0.3);
 
 		endTime = Timer.getFPGATimestamp() + time;
 	}
 			
 	protected void execute() {
-		slavePIDleft.setSetpoint(RobotMap.m_encoderRightFront.getDistance());
-		slavePIDright.setSetpoint(RobotMap.m_encoderLeftFront.getDistance());
+		slavePIDleftFront.setSetpoint(-RobotMap.m_encoderRightFront.getDistance());
+		//slavePIDleftRear.setSetpoint(RobotMap.m_encoderLeftFront.getDistance());
+		//slavePIDrightRear.setSetpoint(-RobotMap.m_encoderRightFront.getDistance());
 		
-		double leftFrontPID = masterPIDleft.computePID(RobotMap.m_encoderLeftFront.getDistance());
-		double leftRearPID = slavePIDleft.computePID(RobotMap.m_encoderLeftRear.getDistance());
-		double rightFrontPID = masterPIDright.computePID(RobotMap.m_encoderRightFront.getDistance());
-		double rightRearPID = slavePIDright.computePID(RobotMap.m_encoderRightRear.getDistance());
-
-		Robotmap.leftFront.set(leftFrontPID)
-		Robotmap.leftRear.set(leftRearPID);
-		Robotmap.rightFront.set(rightFrontPID);
-		Robotmap.rightRear.set(rightRearPID);
+		double rightFrontPID = masterPIDrightFront.computePID(-RobotMap.m_encoderRightFront.getDistance());
+		//double rightRearPID = slavePIDrightRear.computePID(-RobotMap.m_encoderRightRear.getDistance());
+		double leftFrontPID = -slavePIDleftFront.computePID(RobotMap.m_encoderLeftFront.getDistance());
+		//double leftRearPID = slavePIDleftRear.computePID(RobotMap.m_encoderLeftRear.getDistance());
+	
+		RobotMap.m_leftFront.set(leftFrontPID);
+		RobotMap.m_leftRear.set(leftFrontPID);
+		RobotMap.m_rightFront.set(rightFrontPID);
+		RobotMap.m_rightRear.set(rightFrontPID);
 
 		isFinished = Timer.getFPGATimestamp() > endTime;
 	}
@@ -82,12 +83,12 @@ public class AutoEncoderDrive extends Command {
 	}
 
 	protected void end() {
-		Robotmap.leftFront.set(0)
-		Robotmap.leftRear.set(0);
-		Robotmap.rightFront.set(0);
-		Robotmap.rightRear.set(0);
+		RobotMap.m_leftFront.set(0);
+		RobotMap.m_leftRear.set(0);
+		RobotMap.m_rightFront.set(0);
+		RobotMap.m_rightRear.set(0);
 		
-		isFinshed = false;
+		isFinished = false;
 	}
 
 	protected void interrupted() {

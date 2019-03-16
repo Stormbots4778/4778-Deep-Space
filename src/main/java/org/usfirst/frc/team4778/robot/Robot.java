@@ -28,7 +28,6 @@ public class Robot extends TimedRobot {
 	public static final Lifter lifter = new Lifter();
 	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
 	public static final SphereManipulator spheremanipulator = new SphereManipulator();
-	public static final TankDrive 
 
 	public static OI oi = new OI();
 	
