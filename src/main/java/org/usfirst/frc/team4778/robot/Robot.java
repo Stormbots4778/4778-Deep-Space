@@ -28,25 +28,22 @@ public class Robot extends TimedRobot {
 	public static final Lifter lifter = new Lifter();
 	public static final MecanumDrive m_drive = new MecanumDrive(RobotMap.m_leftFront, RobotMap.m_leftRear, RobotMap.m_rightFront, RobotMap.m_rightRear);
 	public static final SphereManipulator spheremanipulator = new SphereManipulator();
+	public static final TankDrive 
 
 	public static OI oi = new OI();
 	
 	public static final int PULSES_PER_REVOLUTION = 256; //PPR
 	public static final int WHEEL_DIAMETER = 6; //inches
 	public static final double DISTANCE_BETWEEN_WHEELS = 21.9; //inches
-	
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	
-	//Cleanup this mess
-	public static double LF; 
-	public static double LR;
-	public static double RF;
-	public static double RR;
+
+	public static double LF, LR, RF, RR; 
 	public static double x = 0;
 	public static double y = 0;
 	public static double angle = 0;
 	
+	Command m_autonomousCommand;
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
+
 	@Override
 	public void robotInit() {
 		// Auto Chooser
@@ -66,6 +63,16 @@ public class Robot extends TimedRobot {
 		RobotMap.m_encoderRightRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
 	}
 
+	public void updateTelemetry() {
+		LF = RobotMap.m_encoderLeftFront.getDistance();
+		LR = RobotMap.m_encoderLeftRear.getDistance();
+		RF = RobotMap.m_encoderRightFront.getDistance();
+		RR = RobotMap.m_encoderRightRear.getDistance();
+		angle = ((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS);
+		x = (((LF + RF) - (LR + RR)) / 4); // * Math.sin(angle);
+		y = (((LF + LR) - (RF + RR)) / 4); // * Math.cos(angle);
+	}
+
 	@Override
 	public void disabledInit() {}
 
@@ -76,7 +83,11 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-						
+		RobotMap.m_encoderLeftFront.reset();
+		RobotMap.m_encoderLeftRear.reset();
+		RobotMap.m_encoderRightFront.reset();
+		RobotMap.m_encoderRightRear.reset();
+		
 		m_autonomousCommand = m_chooser.getSelected();
 				
 		if (m_autonomousCommand != null) {
@@ -88,6 +99,15 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
+		
+		updateTelemetry();
+		SmartDashboard.putNumber("Front Left Encoder", LF);
+		SmartDashboard.putNumber("Back Left Encoder", LR);
+		SmartDashboard.putNumber("Front Right Encoder", RF);
+		SmartDashboard.putNumber("Back Right Encoder", RR);
+		SmartDashboard.putNumber("angle", Math.toDegrees(angle) % 360);
+		SmartDashboard.putNumber("x", x);
+		SmartDashboard.putNumber("y", y);
 	}
 
 	@Override
@@ -107,17 +127,7 @@ public class Robot extends TimedRobot {
 		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 
-		
-
-		//Create separate command
-		LF = RobotMap.m_encoderLeftFront.getDistance();
-		LR = RobotMap.m_encoderLeftRear.getDistance();
-		RF = RobotMap.m_encoderRightFront.getDistance();
-		RR = RobotMap.m_encoderRightRear.getDistance();
-		angle = ((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS);
-		x = (((LF + RF) - (LR + RR)) / 4) * Math.sin(angle);
-		y = (((LF + LR) - (RF + RR)) / 4) * Math.cos(angle);
-
+		updateTelemetry();
 		SmartDashboard.putNumber("Front Left Encoder", LF);
 		SmartDashboard.putNumber("Back Left Encoder", LR);
 		SmartDashboard.putNumber("Front Right Encoder", RF);
