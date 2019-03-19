@@ -52,7 +52,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
 		// Initialize Camera Server
-		//CameraServer.getInstance().addAxisCamera("10.47.78.2");
 		CameraServer.getInstance().startAutomaticCapture();
 
 		// Configure encoder pulse values
@@ -96,7 +95,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-		//CameraServer.getInstance().getVideo();
+		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 		
 		updateTelemetry();
@@ -123,7 +122,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		//CameraServer.getInstance().getVideo();
+		CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 
 		updateTelemetry();
