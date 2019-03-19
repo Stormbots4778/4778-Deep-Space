@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * AutoEncoderTurn.java
  * Used for accurate turning in autonomous
  */
-public class AutoEncoderDrive extends Command {
+public class AutoEncoderTurn extends Command {
 	
 	private double speed;
   private double angle;
@@ -27,11 +27,11 @@ public class AutoEncoderDrive extends Command {
 
 	private boolean isFinished;
   
-	public AutoEncoderDrive(double speed, double angle, double time) {
+	public AutoEncoderTurn(double speed, double angle, double time) {
 		this.speed = speed;
 		this.angle = angle;
 		this.time = time;
-    distance = 2 * angle / Robot.DISTANCE_BETWEEN_WHEELS;
+    distance = 2 * Math.toRadians(angle) / Robot.DISTANCE_BETWEEN_WHEELS;
 	}
 
 	protected void initialize() {
@@ -51,7 +51,7 @@ public class AutoEncoderDrive extends Command {
 		slavePIDrightRear.setTolerence(1);
 		slavePIDrightRear.setOutputLimits(-0.4, 0.4);
 
-		masterPIDleftFront = new PIDController(0.1, 0, 0, -distance);
+		masterPIDleftFront = new PIDController(0.1, 0, 0, distance);
 		masterPIDleftFront.setTolerence(3);
 		masterPIDleftFront.setOutputLimits(-speed, speed);
 
@@ -66,10 +66,10 @@ public class AutoEncoderDrive extends Command {
 		slavePIDleftRear.setSetpoint(-RobotMap.m_encoderRightFront.getDistance());
 		slavePIDrightRear.setSetpoint(-RobotMap.m_encoderLeftFront.getDistance());
 		
-		double rightFrontPID = masterPIDrightFront.computePID(-RobotMap.m_encoderRightFront.getDistance());
-		double leftFrontPID = -masterPIDleftFront.computePID(RobotMap.m_encoderLeftFront.getDistance());
-		double leftRearPID = -slavePIDleftRear.computePID(RobotMap.m_encoderLeftRear.getDistance());
-    double rightRearPID = slavePIDrightRear.computePID(-RobotMap.m_encoderRightRear.getDistance());
+		double rightFrontPID = -masterPIDrightFront.computePID(RobotMap.m_encoderRightFront.getDistance());
+		double leftFrontPID = masterPIDleftFront.computePID(-RobotMap.m_encoderLeftFront.getDistance());
+		double leftRearPID = slavePIDleftRear.computePID(-RobotMap.m_encoderLeftRear.getDistance());
+    double rightRearPID = -slavePIDrightRear.computePID(RobotMap.m_encoderRightRear.getDistance());
 	
 		RobotMap.m_leftFront.set(leftFrontPID);
 		RobotMap.m_rightFront.set(rightFrontPID);

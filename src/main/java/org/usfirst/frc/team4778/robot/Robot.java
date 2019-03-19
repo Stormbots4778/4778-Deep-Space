@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-		CameraServer.getInstance().getVideo();
+		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 		
 		updateTelemetry();
@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		CameraServer.getInstance().getVideo();
+		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 
 		updateTelemetry();

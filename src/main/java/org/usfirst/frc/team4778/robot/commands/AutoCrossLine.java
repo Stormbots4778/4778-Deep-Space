@@ -10,6 +10,7 @@ public class AutoCrossLine extends CommandGroup {
   
   public AutoCrossLine() {
     //addSequential(new Descend());
-    addSequential(new AutoEncoderDrive(0.3,162,10));
+    addSequential(new AutoEncoderDrive(0.3,170,10));
+    //addSequential(new AutoEncoderTurn(0.3,90,10));
   }
 }
