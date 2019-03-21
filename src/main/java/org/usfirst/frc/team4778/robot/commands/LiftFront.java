@@ -29,6 +29,7 @@ public class LiftFront extends Command {
     }
 
     protected void end() {
+        isFinished = false;
     }
 
     protected void interrupted() {

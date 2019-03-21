@@ -29,6 +29,7 @@ public class LiftRear extends Command {
     }
 
     protected void end() {
+        isFinished = false;
     }
 
     protected void interrupted() {

@@ -22,14 +22,14 @@ public class OI {
 	public static Joystick joystickLeft = new Joystick(0);
 	public static Joystick joystickRight = new Joystick(1);
 
-	public static Button intake = new JoystickButton(joystickLeft, 3);
-	public static Button shoot = new JoystickButton(joystickRight, 3);
+	public static Button intake = new JoystickButton(joystickLeft, 2);
+	public static Button shoot = new JoystickButton(joystickLeft, 1);
 
 	public static Button pushL = new JoystickButton(joystickLeft, 1);
-	public static Button pushR = new JoystickButton(joystickRight, 1);
+	//public static Button pushR = new JoystickButton(joystickRight, 1);
 
-	public static Button release_disk = new JoystickButton(joystickRight,2); 
-	public static Button grab_disk = new JoystickButton(joystickLeft, 2);
+	public static Button release_disk = new JoystickButton(joystickRight, 1); 
+	public static Button grab_disk = new JoystickButton(joystickRight, 2);
 	
 	public static Button lift_front_up = new JoystickButton(joystickRight, 6); //comment out when not testing
 	public static Button lift_rear_up = new JoystickButton(joystickLeft, 11); //comment out when not testing
@@ -47,7 +47,7 @@ public class OI {
 		shoot.toggleWhenPressed(new Shoot(0.35));
 
 		pushL.whileHeld(new Push());
-		pushR.whileHeld(new Push());
+		//pushR.whileHeld(new Push());
 		
 		grab_disk.whileHeld(new Grab(0.2,true));
 		release_disk.whenPressed(new TimedGrab(0.8,false,0.06));

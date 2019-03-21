@@ -3,12 +3,14 @@ package org.usfirst.frc.team4778.robot;
 import org.usfirst.frc.team4778.robot.commands.AutoCrossLine;
 import org.usfirst.frc.team4778.robot.commands.AutoDisk;
 import org.usfirst.frc.team4778.robot.commands.AutoSphere;
+import org.usfirst.frc.team4778.robot.commands.GetTeamColor;
 import org.usfirst.frc.team4778.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 import org.usfirst.frc.team4778.robot.subsystems.Lifter;
 import org.usfirst.frc.team4778.robot.subsystems.SphereManipulator;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,8 +42,12 @@ public class Robot extends TimedRobot {
 	public static double y = 0;
 	public static double angle = 0;
 	
+	UsbCamera camForward;
+	UsbCamera camDown;
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Command> m_teamChooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
@@ -51,9 +57,19 @@ public class Robot extends TimedRobot {
 		m_chooser.addOption("Sphere", new AutoSphere());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
+		// Team Chooser
+		m_teamChooser.setDefaultOption("Blue", new GetTeamColor("Blue"));
+		m_teamChooser.addOption("Red", new GetTeamColor("Red")); 
+		SmartDashboard.putData("Team", m_teamChooser);
+/*
 		// Initialize Camera Server
 		CameraServer.getInstance().startAutomaticCapture();
-
+*/
+		camForward = CameraServer.getInstance().startAutomaticCapture(0);
+		camForward.setResolution(640,480);
+		camDown = CameraServer.getInstance().startAutomaticCapture(1);
+		camDown.setResolution(640,480);
+		
 		// Configure encoder pulse values
 		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
 		RobotMap.m_encoderLeftRear.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
@@ -95,7 +111,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 		
 		updateTelemetry();
@@ -122,7 +137,6 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		//CameraServer.getInstance().getVideo();
 		Scheduler.getInstance().run();
 
 		updateTelemetry();
