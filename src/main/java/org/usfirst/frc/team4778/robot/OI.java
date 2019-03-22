@@ -52,12 +52,17 @@ public class OI {
 		grab_disk.whileHeld(new Grab(0.2,true));
 		release_disk.whenPressed(new TimedGrab(0.8,false,0.06));
 
+		//comment out when not testing
 		lift_front_up.whileActive(new LiftFront(true));
 		lift_rear_up.whileActive(new LiftRear(true));
 		lift_front_down.whileActive(new LiftFront(false));
 		lift_rear_down.whileActive(new LiftRear(false));
+		//comment out when not testing
+
 		ascend.whenPressed(new Ascend());
 		descend.whenPressed(new Descend());
+		
+		//comment out when not testing
 		lift_drive_forward.whenPressed(new LiftDrive(0.5, true, 1));
 		lift_drive_backward.whenPressed(new LiftDrive(-0.5, true, 1));
 	}

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoSphere extends CommandGroup {
 
   public AutoSphere() {
-    addSequential(new Descend());
+    //addSequential(new Descend());
+    addSequential(new AutoEncoderTurn(0.35,-45,2.5));
   }
 }

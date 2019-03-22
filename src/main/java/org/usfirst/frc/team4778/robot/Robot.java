@@ -3,7 +3,7 @@ package org.usfirst.frc.team4778.robot;
 import org.usfirst.frc.team4778.robot.commands.AutoCrossLine;
 import org.usfirst.frc.team4778.robot.commands.AutoDisk;
 import org.usfirst.frc.team4778.robot.commands.AutoSphere;
-import org.usfirst.frc.team4778.robot.commands.GetTeamColor;
+//import org.usfirst.frc.team4778.robot.commands.GetTeamColor;
 import org.usfirst.frc.team4778.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 import org.usfirst.frc.team4778.robot.subsystems.Lifter;
@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	SendableChooser<Command> m_teamChooser = new SendableChooser<>();
+	//SendableChooser<Command> m_teamChooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
@@ -57,18 +57,20 @@ public class Robot extends TimedRobot {
 		m_chooser.addOption("Sphere", new AutoSphere());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
+		/*
 		// Team Chooser
 		m_teamChooser.setDefaultOption("Blue", new GetTeamColor("Blue"));
 		m_teamChooser.addOption("Red", new GetTeamColor("Red")); 
 		SmartDashboard.putData("Team", m_teamChooser);
-/*
-		// Initialize Camera Server
-		CameraServer.getInstance().startAutomaticCapture();
-*/
+		*/
+
 		camForward = CameraServer.getInstance().startAutomaticCapture(0);
-		camForward.setResolution(640,480);
+		camForward.setResolution(240,135);
+		camForward.setFPS(30);
 		camDown = CameraServer.getInstance().startAutomaticCapture(1);
-		camDown.setResolution(640,480);
+		camDown.setResolution(240,180);
+		camDown.setFPS(30);
+		camDown.setExposureManual(25);
 		
 		// Configure encoder pulse values
 		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
@@ -85,6 +87,14 @@ public class Robot extends TimedRobot {
 		angle = ((LF + LR) + (RF + RR)) / (4 * DISTANCE_BETWEEN_WHEELS);
 		x = (((LF + RF) - (LR + RR)) / 4); // * Math.sin(angle);
 		y = (((LF + LR) - (RF + RR)) / 4); // * Math.cos(angle);
+
+		SmartDashboard.putNumber("Front Left Encoder", LF);
+		SmartDashboard.putNumber("Back Left Encoder", LR);
+		SmartDashboard.putNumber("Front Right Encoder", RF);
+		SmartDashboard.putNumber("Back Right Encoder", RR);
+		SmartDashboard.putNumber("angle", Math.toDegrees(angle) % 360);
+		SmartDashboard.putNumber("x", x);
+		SmartDashboard.putNumber("y", y);
 	}
 
 	@Override
@@ -114,13 +124,6 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		updateTelemetry();
-		SmartDashboard.putNumber("Front Left Encoder", LF);
-		SmartDashboard.putNumber("Back Left Encoder", LR);
-		SmartDashboard.putNumber("Front Right Encoder", RF);
-		SmartDashboard.putNumber("Back Right Encoder", RR);
-		SmartDashboard.putNumber("angle", Math.toDegrees(angle) % 360);
-		SmartDashboard.putNumber("x", x);
-		SmartDashboard.putNumber("y", y);
 	}
 
 	@Override
@@ -140,13 +143,6 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 
 		updateTelemetry();
-		SmartDashboard.putNumber("Front Left Encoder", LF);
-		SmartDashboard.putNumber("Back Left Encoder", LR);
-		SmartDashboard.putNumber("Front Right Encoder", RF);
-		SmartDashboard.putNumber("Back Right Encoder", RR);
-		SmartDashboard.putNumber("angle", Math.toDegrees(angle) % 360);
-		SmartDashboard.putNumber("x", x);
-		SmartDashboard.putNumber("y", y);
 	}
 	
 	@Override

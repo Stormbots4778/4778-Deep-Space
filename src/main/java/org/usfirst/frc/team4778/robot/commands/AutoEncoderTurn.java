@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoEncoderTurn extends Command {
 	
 	private double speed;
-  private double angle;
 	private double distance;
 	
 	private double time;
@@ -22,16 +21,15 @@ public class AutoEncoderTurn extends Command {
 	
 	private PIDController masterPIDrightFront;
 	private PIDController slavePIDrightRear;
-	private PIDController masterPIDleftFront;
+	private PIDController slavePIDleftFront;
 	private PIDController slavePIDleftRear;
 
 	private boolean isFinished;
   
 	public AutoEncoderTurn(double speed, double angle, double time) {
 		this.speed = speed;
-		this.angle = angle;
 		this.time = time;
-    distance = 2 * Math.toRadians(angle) / Robot.DISTANCE_BETWEEN_WHEELS;
+		distance = -Math.toRadians(angle) * Robot.DISTANCE_BETWEEN_WHEELS;
 	}
 
 	protected void initialize() {
@@ -44,18 +42,18 @@ public class AutoEncoderTurn extends Command {
 		isFinished = false;
 	
 		masterPIDrightFront = new PIDController(0.1, 0, 0, distance);
-		masterPIDrightFront.setTolerence(3);
+		masterPIDrightFront.setTolerence(2);
 		masterPIDrightFront.setOutputLimits(-speed, speed);
 
-		slavePIDrightRear = new PIDController(0.5, 0, 0, 0);
+		slavePIDrightRear = new PIDController(0.2, 0, 0, 0);
 		slavePIDrightRear.setTolerence(1);
 		slavePIDrightRear.setOutputLimits(-0.4, 0.4);
 
-		masterPIDleftFront = new PIDController(0.1, 0, 0, distance);
-		masterPIDleftFront.setTolerence(3);
-		masterPIDleftFront.setOutputLimits(-speed, speed);
+		slavePIDleftFront = new PIDController(0.2, 0, 0, 0);
+		slavePIDleftFront.setTolerence(2);
+		slavePIDleftFront.setOutputLimits(-0.4, 0.4);
 
-		slavePIDleftRear = new PIDController(0.5, 0, 0, 0);
+		slavePIDleftRear = new PIDController(0.2, 0, 0, 0);
 		slavePIDleftRear.setTolerence(1);
 		slavePIDleftRear.setOutputLimits(-0.4, 0.4);
 
@@ -64,17 +62,18 @@ public class AutoEncoderTurn extends Command {
 			
 	protected void execute() {
 		slavePIDleftRear.setSetpoint(-RobotMap.m_encoderRightFront.getDistance());
+		slavePIDleftFront.setSetpoint(-RobotMap.m_encoderRightFront.getDistance());
 		slavePIDrightRear.setSetpoint(-RobotMap.m_encoderLeftFront.getDistance());
 		
-		double rightFrontPID = -masterPIDrightFront.computePID(RobotMap.m_encoderRightFront.getDistance());
-		double leftFrontPID = masterPIDleftFront.computePID(-RobotMap.m_encoderLeftFront.getDistance());
+		double rightFrontPID = masterPIDrightFront.computePID(-RobotMap.m_encoderRightFront.getDistance());
+		double rightRearPID = slavePIDrightRear.computePID(-RobotMap.m_encoderRightRear.getDistance());
+		double leftFrontPID = slavePIDleftFront.computePID(-RobotMap.m_encoderLeftFront.getDistance());
 		double leftRearPID = slavePIDleftRear.computePID(-RobotMap.m_encoderLeftRear.getDistance());
-    double rightRearPID = -slavePIDrightRear.computePID(RobotMap.m_encoderRightRear.getDistance());
 	
-		RobotMap.m_leftFront.set(leftFrontPID);
 		RobotMap.m_rightFront.set(rightFrontPID);
 		RobotMap.m_rightRear.set(rightRearPID);
-    RobotMap.m_leftRear.set(leftRearPID);
+		RobotMap.m_leftFront.set(leftFrontPID);
+		RobotMap.m_leftRear.set(leftRearPID);
 
 		isFinished = Timer.getFPGATimestamp() > endTime;
 	}

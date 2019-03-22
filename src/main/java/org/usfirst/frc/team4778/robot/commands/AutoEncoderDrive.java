@@ -46,20 +46,20 @@ public class AutoEncoderDrive extends Command {
 		masterPIDrightFront.setTolerence(3);
 		masterPIDrightFront.setOutputLimits(-speed, speed);
 
-		slavePIDrightRear = new PIDController(0.5, 0, 0, 0);
+		slavePIDrightRear = new PIDController(0.5, 0, 0.2, 0);
 		slavePIDrightRear.setTolerence(1);
-		slavePIDrightRear.setOutputLimits(-0.4, 0.4);
+		slavePIDrightRear.setOutputLimits(-0.45, 0.45);
 
 		//masterPIDleftFront = new PIDController(0.1, 0, 0, distance);
 		//masterPIDleftFront.setTolerence(3);
 		//masterPIDleftFront.setOutputLimits(-speed,speed);
-		slavePIDleftFront = new PIDController(0.75, 0, 0, 0);
-		slavePIDleftFront.setTolerence(2);
-		slavePIDleftFront.setOutputLimits(-0.4,0.4);
+		slavePIDleftFront = new PIDController(0.5, 0, 0.2, 0);
+		slavePIDleftFront.setTolerence(1);
+		slavePIDleftFront.setOutputLimits(-0.45,0.45);
 
-		slavePIDleftRear = new PIDController(0.5, 0, 0, 0);
+		slavePIDleftRear = new PIDController(0.5, 0, 0.2, 0);
 		slavePIDleftRear.setTolerence(1);
-		slavePIDleftRear.setOutputLimits(-0.4, 0.4);
+		slavePIDleftRear.setOutputLimits(-0.45, 0.45);
 
 		endTime = Timer.getFPGATimestamp() + time;
 	}
