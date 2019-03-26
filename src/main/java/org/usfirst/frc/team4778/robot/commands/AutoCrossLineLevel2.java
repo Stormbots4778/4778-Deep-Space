@@ -3,14 +3,14 @@ package org.usfirst.frc.team4778.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /*
-* AutoCrossLine.java
+* AutoCrossLineLevel2.java
 * Autonomous for only crossing the line
 */
-public class AutoCrossLine extends CommandGroup {
+public class AutoCrossLineLevel2 extends CommandGroup {
   
-  public AutoCrossLine() {
+  public AutoCrossLineLevel2() {
     //addSequential(new Descend());
+    addSequential(new AutoEncoderTurn(0.35,180,10));
     addSequential(new AutoEncoderDrive(0.3,124,7));
-    //addSequential(new AutoEncoderTurn(0.35,180,10));
   }
 }

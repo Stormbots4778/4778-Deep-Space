@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Relay.Direction;
+import edu.wpi.first.wpilibj.Relay;
 
 /*
 * RobotMap
@@ -51,8 +53,9 @@ public class RobotMap {
 	// Pusher solenoid
 	public static DoubleSolenoid m_pusherSolenoid = new DoubleSolenoid(4,5);
 
-	// LED strip solenoid
-	public static DoubleSolenoid leds = new DoubleSolenoid(6,7); //6 Red 7 Blue
+	// LED strip relays
+	public static Relay blueLeds = new Relay(0);
+	//public static Relay redLeds = new Relay(1);
 
 	// Compressor
 	public static Compressor m_compressor = new Compressor();

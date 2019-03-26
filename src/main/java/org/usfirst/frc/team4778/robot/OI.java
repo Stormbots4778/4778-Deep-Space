@@ -25,8 +25,7 @@ public class OI {
 	public static Button intake = new JoystickButton(joystickLeft, 2);
 	public static Button shoot = new JoystickButton(joystickLeft, 1);
 
-	public static Button pushL = new JoystickButton(joystickLeft, 1);
-	//public static Button pushR = new JoystickButton(joystickRight, 1);
+	public static Button push = new JoystickButton(joystickLeft, 1);
 
 	public static Button release_disk = new JoystickButton(joystickRight, 1); 
 	public static Button grab_disk = new JoystickButton(joystickRight, 2);
@@ -36,17 +35,17 @@ public class OI {
 	public static Button lift_front_down = new JoystickButton(joystickRight, 7); //comment out when not testing
 	public static Button lift_rear_down = new JoystickButton(joystickLeft, 10); //comment out when not testing
 	
-	public static Button descend = new JoystickButton(joystickLeft,8);
-	public static Button ascend = new JoystickButton(joystickLeft,9);
+	public static Button descend = new JoystickButton(joystickLeft,7);
+	public static Button ascend = new JoystickButton(joystickRight,11);
 
-	public static Button lift_drive_forward = new JoystickButton(joystickLeft, 6);
-	public static Button lift_drive_backward = new JoystickButton(joystickLeft, 7);
+	/*public static Button lift_drive_forward = new JoystickButton(joystickLeft, 6);
+	public static Button lift_drive_backward = new JoystickButton(joystickLeft, 7);*/
 
 	public OI() {
 		intake.toggleWhenPressed(new Shoot(-0.1));
 		shoot.toggleWhenPressed(new Shoot(0.35));
 
-		pushL.whileHeld(new Push());
+		push.whileHeld(new Push());
 		//pushR.whileHeld(new Push());
 		
 		grab_disk.whileHeld(new Grab(0.2,true));
@@ -63,7 +62,8 @@ public class OI {
 		descend.whenPressed(new Descend());
 		
 		//comment out when not testing
-		lift_drive_forward.whenPressed(new LiftDrive(0.5, true, 1));
+		/*lift_drive_forward.whenPressed(new LiftDrive(0.5, true, 1));
 		lift_drive_backward.whenPressed(new LiftDrive(-0.5, true, 1));
+		*/
 	}
 }

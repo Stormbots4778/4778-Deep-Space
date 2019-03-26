@@ -1,7 +1,7 @@
 package org.usfirst.frc.team4778.robot.commands;
 import java.lang.String;
 
-//import org.usfirst.frc.team4778.robot.Robot;
+import org.usfirst.frc.team4778.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,16 +11,16 @@ import edu.wpi.first.wpilibj.command.Command;
 */
 public class GetTeamColor extends Command {
   
-  //private String color;
+  private String color;
 
   public GetTeamColor(String color) {
-    //this.color = color;
+    this.color = color;
   }
 
   protected void initialize() {}
 
   protected void execute() {
-    //Robot.spheremanipulator.getTeamColor(color);
+    Robot.spheremanipulator.getTeamColor(color);
   }
 
   protected boolean isFinished() {

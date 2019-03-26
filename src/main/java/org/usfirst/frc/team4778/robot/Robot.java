@@ -1,9 +1,10 @@
 package org.usfirst.frc.team4778.robot;
 
-import org.usfirst.frc.team4778.robot.commands.AutoCrossLine;
+import org.usfirst.frc.team4778.robot.commands.AutoCrossLineLevel1;
+import org.usfirst.frc.team4778.robot.commands.AutoCrossLineLevel2;
 import org.usfirst.frc.team4778.robot.commands.AutoDisk;
 import org.usfirst.frc.team4778.robot.commands.AutoSphere;
-//import org.usfirst.frc.team4778.robot.commands.GetTeamColor;
+import org.usfirst.frc.team4778.robot.commands.GetTeamColor;
 import org.usfirst.frc.team4778.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team4778.robot.subsystems.Grabber;
 import org.usfirst.frc.team4778.robot.subsystems.Lifter;
@@ -47,22 +48,21 @@ public class Robot extends TimedRobot {
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	//SendableChooser<Command> m_teamChooser = new SendableChooser<>();
+	SendableChooser<Command> m_teamChooser = new SendableChooser<>();
 
 	@Override
 	public void robotInit() {
 		// Auto Chooser
-		m_chooser.setDefaultOption("Cross Line", new AutoCrossLine());
-		m_chooser.addOption("Disk", new AutoDisk());
+		m_chooser.setDefaultOption("Disk", new AutoDisk());
+		m_chooser.addOption("Cross Line Level 1", new AutoCrossLineLevel1());
+		m_chooser.addOption("Cross Line Level 2", new AutoCrossLineLevel2());
 		m_chooser.addOption("Sphere", new AutoSphere());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		/*
 		// Team Chooser
 		m_teamChooser.setDefaultOption("Blue", new GetTeamColor("Blue"));
 		m_teamChooser.addOption("Red", new GetTeamColor("Red")); 
 		SmartDashboard.putData("Team", m_teamChooser);
-		*/
 
 		camForward = CameraServer.getInstance().startAutomaticCapture(0);
 		camForward.setResolution(240,135);
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
 		camDown = CameraServer.getInstance().startAutomaticCapture(1);
 		camDown.setResolution(240,180);
 		camDown.setFPS(30);
-		camDown.setExposureManual(25);
+		camDown.setExposureManual(50);
 		
 		// Configure encoder pulse values
 		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
