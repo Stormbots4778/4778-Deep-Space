@@ -38,8 +38,8 @@ public class OI {
 	public static Button descend = new JoystickButton(joystickLeft,7);
 	public static Button ascend = new JoystickButton(joystickRight,11);
 
-	/*public static Button lift_drive_forward = new JoystickButton(joystickLeft, 6);
-	public static Button lift_drive_backward = new JoystickButton(joystickLeft, 7);*/
+	public static Button lift_drive_forward = new JoystickButton(joystickRight, 8);
+	public static Button lift_drive_backward = new JoystickButton(joystickRight, 9);
 
 	public OI() {
 		intake.toggleWhenPressed(new Shoot(-0.1));
@@ -62,8 +62,7 @@ public class OI {
 		descend.whenPressed(new Descend());
 		
 		//comment out when not testing
-		/*lift_drive_forward.whenPressed(new LiftDrive(0.5, true, 1));
-		lift_drive_backward.whenPressed(new LiftDrive(-0.5, true, 1));
-		*/
+		lift_drive_forward.whileHeld(new LiftDrive(0.4, true));
+		lift_drive_backward.whileHeld(new LiftDrive(-0.4, true));
 	}
 }

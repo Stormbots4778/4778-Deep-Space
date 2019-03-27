@@ -23,14 +23,21 @@ public class LiftDrive extends Command {
     	this.rearWheels = rearWheels;
     	this.speed = speed;
     	this.time = time;
-    }
+		}
+		
+		public LiftDrive(double speed, boolean rearWheels)
+		{
+			this.rearWheels = rearWheels;
+			this.speed = speed;
+			this.time = 0;
+		}
 
     protected void initialize() {
     	endTime = Timer.getFPGATimestamp() + time;
     }
 
     protected void execute() {
-    	if (Timer.getFPGATimestamp() >= endTime) {
+    	if ((Timer.getFPGATimestamp() >= endTime) && (time != 0)) {
 				isFinished = true;
 			}
 			Robot.lifter.liftDrive(speed,rearWheels);
