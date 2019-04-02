@@ -49,7 +49,7 @@ public class OI {
 		//pushR.whileHeld(new Push());
 		
 		grab_disk.whileHeld(new Grab(0.2,true));
-		release_disk.whenPressed(new TimedGrab(0.8,false,0.06));
+		release_disk.whenPressed(new TimedGrab(0.6,false,0.06));
 
 		//comment out when not testing
 		lift_front_up.whileActive(new LiftFront(true));

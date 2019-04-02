@@ -10,7 +10,7 @@ public class AutoCrossLineLevel2 extends CommandGroup {
   
   public AutoCrossLineLevel2() {
     //addSequential(new Descend());
-    addSequential(new AutoEncoderTurn(0.35,180,10));
-    addSequential(new AutoEncoderDrive(0.3,124,7));
+    //addSequential(new AutoEncoderTurn(0.35,180,10));
+    //addSequential(new AutoEncoderDrive(0.3,124,7));
   }
 }

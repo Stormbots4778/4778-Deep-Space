@@ -53,9 +53,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		// Auto Chooser
-		m_chooser.setDefaultOption("Disk", new AutoDisk());
+		m_chooser.setDefaultOption("Cross Line Level 2", new AutoCrossLineLevel2());
 		m_chooser.addOption("Cross Line Level 1", new AutoCrossLineLevel1());
-		m_chooser.addOption("Cross Line Level 2", new AutoCrossLineLevel2());
+		m_chooser.addOption("Disk", new AutoDisk());
 		m_chooser.addOption("Sphere", new AutoSphere());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
 		camDown = CameraServer.getInstance().startAutomaticCapture(1);
 		camDown.setResolution(240,180);
 		camDown.setFPS(30);
-		camDown.setExposureManual(50);
+		camDown.setExposureManual(30);
 		
 		// Configure encoder pulse values
 		RobotMap.m_encoderLeftFront.setDistancePerPulse((WHEEL_DIAMETER * Math.PI) / PULSES_PER_REVOLUTION);
@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
 		m_autonomousCommand = m_chooser.getSelected();
 				
 		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+			//m_autonomousCommand.start();
 		}
 	}
 
